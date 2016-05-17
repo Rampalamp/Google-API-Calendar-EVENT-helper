@@ -19,6 +19,7 @@ namespace EventEmailAttemptTwo
 {
     public partial class Form1 : Form
     {
+        string calendID = "YOUR CALENDAR ID";
         static string[] Scopes = { CalendarService.Scope.Calendar };
         static string ApplicationName = "Create Event Test";
         UserCredential credential;
@@ -47,10 +48,10 @@ namespace EventEmailAttemptTwo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string calendarId = "greensaver.org_1lokosgre3bqpnue80ks6dvkdk@group.calendar.google.com";
+            string calendarId = calendID;
             IList<string> attendees = new List<string>();
-            attendees.Add("matthew.rampen@greensaver.org");
-            attendees.Add("matt.mccann@greensaver.org");
+            attendees.Add("EMAIL ADDRESS");
+            attendees.Add("EMAIL ADDRESS");
 
             createEvent("TestSummary", "TestDescription", attendees, startDate.Value, endDate.Value, service, calendarId);
 
@@ -60,7 +61,7 @@ namespace EventEmailAttemptTwo
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string calId = "greensaver.org_1lokosgre3bqpnue80ks6dvkdk@group.calendar.google.com";
+            string calId = calendID;
             deleteEvent("TestSummary", calId, service);
 
         }
@@ -115,8 +116,8 @@ namespace EventEmailAttemptTwo
                     new ClientSecrets
                     {
                         //Adjust ClientID and ClientSecret according to Google developer API credential INFO
-                        ClientId = "121332162524-jlfuqbginmv3pmafl2bp7gl41ucs3aca.apps.googleusercontent.com",
-                        ClientSecret = "wic7itCF3XlD6UuRcvfBYU47",
+                        ClientId = "YOUR CLIENT ID FROM GOOGLE DEV CONSOLE",
+                        ClientSecret = "YOUR CLIENT ID FROM GOOGLE DEV CONSOLE",
                     },
                     new[] { CalendarService.Scope.Calendar },
                     "user",
