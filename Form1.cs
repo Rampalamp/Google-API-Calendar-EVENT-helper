@@ -20,6 +20,7 @@ namespace EventEmailAttemptTwo
     public partial class Form1 : Form
     {
         string calendID = "YOUR CALENDAR ID";
+        //this scope gives us read/write on calendars allowing for event creation
         static string[] Scopes = { CalendarService.Scope.Calendar };
         static string ApplicationName = "Create Event Test";
         UserCredential credential;
@@ -33,6 +34,7 @@ namespace EventEmailAttemptTwo
         {
             try
             {
+                //grab services and credentials on form load
                 service = createCredentialsAndService();
 
                 
@@ -41,7 +43,7 @@ namespace EventEmailAttemptTwo
             {
                 Console.WriteLine(ez.Message);
             }
-            //EventsResource.ListRequest request = service.Events.List("greensaver.org_1lokosgre3bqpnue80ks6dvkdk@group.calendar.google.com");
+         
 
             
         }
@@ -69,7 +71,7 @@ namespace EventEmailAttemptTwo
         public static void deleteEvent(string eventName, string calendarID, CalendarService service)
         {
             
-            //Grab all events with respect to calendar ID greensaver.org_1lokosgre3bqpnue80ks6dvkdk@group.calendar.google.com TEST Calendar
+            //Grab all events with respect to calendar ID
             Events events = service.Events.List(calendarID).Execute();
             //Iterate through list
             IList<Event> eventList = (IList<Event>)events.Items;
@@ -86,6 +88,7 @@ namespace EventEmailAttemptTwo
         }
         public static void createEvent(string eventName, string eventDescription, IList<string> attendees, DateTime startDate, DateTime endDate, CalendarService service, string calId)
         {
+            //Creating new event
             IList<EventAttendee> attending = new List<EventAttendee>();
             Event newEvent = new Event();
             newEvent.Summary = eventName;
@@ -112,6 +115,7 @@ namespace EventEmailAttemptTwo
 
         public static CalendarService createCredentialsAndService()
         {
+            //grabbing service using UserCredentials
             CalendarService service;
             UserCredential cred = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     new ClientSecrets
