@@ -68,8 +68,9 @@ namespace EventEmailAttemptTwo
 
         public static void deleteEvent(string eventName, string calendarID, CalendarService service)
         {
+            
             //Grab all events with respect to calendar ID greensaver.org_1lokosgre3bqpnue80ks6dvkdk@group.calendar.google.com TEST Calendar
-            Events events = service.Events.List("greensaver.org_1lokosgre3bqpnue80ks6dvkdk@group.calendar.google.com").Execute();
+            Events events = service.Events.List(calendarID).Execute();
             //Iterate through list
             IList<Event> eventList = (IList<Event>)events.Items;
             foreach (Event eventItem in eventList)
@@ -78,7 +79,7 @@ namespace EventEmailAttemptTwo
                 //Delete Event based on Event Summary (the title of event NOT description)
                 if (eventName == eventItem.Summary)
                 {
-                    var result = service.Events.Delete("greensaver.org_1lokosgre3bqpnue80ks6dvkdk@group.calendar.google.com", eventItem.Id.ToString()).Execute();
+                    var result = service.Events.Delete(calendarID, eventItem.Id.ToString()).Execute();
                 }
 
             }
